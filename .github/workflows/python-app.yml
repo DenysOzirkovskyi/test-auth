@@ -48,8 +48,8 @@ jobs:
     needs: docker-login
     runs-on: ubuntu-latest
     steps:    
-    -  name: Build and push
-       uses: docker/build-push-action@v5
-       with:
-          push: true
-          tags: denysozirkovskyi/test_auth:latest
+    - name: Build and push Docker image
+      uses: docker/build-push-action@v5
+      with:
+        push: true
+        tags: denysozirkovskyi/test_auth:latest
