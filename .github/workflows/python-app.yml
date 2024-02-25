@@ -47,8 +47,7 @@ jobs:
   build-and-push:
     needs: docker-login
     runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v3
+    steps:    
     -  name: Build and push
        uses: docker/build-push-action@v5
        with:
