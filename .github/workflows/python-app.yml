@@ -59,9 +59,9 @@ jobs:
       - name: Deploy server to Hetzner Cloud
         uses: TimDaub/hetzner-cloud-deploy-server-action@v2
         with:
-          server-name: "gh-actions-server"
-          server-image: "ubuntu-20.04"
+          server-name: "testauth"
+          server-image: "ubuntu-22.04"
           server-type: "cx11"
-          server-location: "nbg1"
-          ssh-key-name: "my key name"
+          server-location: "fsn1-dc14"
+          ssh-key-name: "test"
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
