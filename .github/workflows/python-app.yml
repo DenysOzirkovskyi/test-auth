@@ -51,16 +51,20 @@ jobs:
         push: true
         tags: denysozirkovskyi/test_auth:latest
   
-  build:
-    needs: setup-and-lint
-    runs-on: ubuntu-20.04
+  deploy-to-server:
+    needs: docker-login
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: Deploy server to Hetzner Cloud
-        uses: TimDaub/hetzner-cloud-deploy-server-action@v2
+      - name: Deploy to server
+        uses: appleboy/ssh-action@master
         with:
-          server-name: "testauth"
-          server-image: "ubuntu-22.04"
-          server-type: "cx11"
-          ssh-key-name: "test"
-          hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            docker pull denysozirkovskyi/test_auth:latest
+            # Here, add commands to stop the current container, and start a new one using the pulled image
+            # Example:
+            docker stop my-app-container || true
+            docker rm my-app-container || true
+            docker run --name my-app-container -d denysozirkovskyi/test_auth:latest
