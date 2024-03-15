@@ -62,6 +62,5 @@ jobs:
           server-name: "testauth"
           server-image: "ubuntu-22.04"
           server-type: "cx11"
-          server-location: "fsn1-dc14"
           ssh-key-name: "test"
           hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
