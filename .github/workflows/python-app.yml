@@ -50,3 +50,18 @@ jobs:
       with:
         push: true
         tags: denysozirkovskyi/test_auth:latest
+  
+  build:
+    needs: setup-and-lint
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - name: Deploy server to Hetzner Cloud
+        uses: TimDaub/hetzner-cloud-deploy-server-action@v2
+        with:
+          server-name: "gh-actions-server"
+          server-image: "ubuntu-20.04"
+          server-type: "cx11"
+          server-location: "nbg1"
+          ssh-key-name: "my key name"
+          hcloud-token: ${{ secrets.HCLOUD_TOKEN }}
